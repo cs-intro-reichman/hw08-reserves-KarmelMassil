@@ -38,7 +38,8 @@ class PlayList {
         if (size == maxSize)
         return false;
         else {
-            tracks[size++] = track;
+            tracks[size] = track;
+            size++;
             return true;
         }
     }
@@ -56,8 +57,10 @@ class PlayList {
 
     /** Removes the last track from this list. If the list is empty, does nothing. */
      public void removeLast() {
-        if (size!= 0)
-           tracks[--size] = null;
+        if (size!= 0) {
+           tracks[size - 1] = null;
+           size--;
+        }
     }
     
     /** Returns the total duration (in seconds) of all the tracks in this list.*/
@@ -73,10 +76,10 @@ class PlayList {
     /** Returns the index of the track with the given title in this list.
      *  If such a track is not found, returns -1. */
     public int indexOf(String title) {
-        String name = title.substring(0,1).toUpperCase() + title.substring(1,title.length()-1).toLowerCase();
+        String name = title.toLowerCase();
         for (int i = 0; i < size; i++) 
         {
-            if((tracks[i].getTitle()).equals(title)) {
+            if((tracks[i].getTitle().toLowerCase).equals(name)) {
                 return i;
             }
         }
@@ -90,13 +93,14 @@ class PlayList {
      *  is full, does nothing and returns false. Otherwise, inserts the track and
      *  returns true. */
     public boolean add(int i, Track track) {
-        if (maxSize == size || i < 0 || i > size)  
+        if (maxSize == size || i < 0 || i >= size)  
             return false;
         else {
             for (int k = size; k > i; k--) {
                 this.tracks[k] = this.tracks[k-1];
             }
             this.tracks[i] = track;
+            size++;
             return true;
         }
     }
