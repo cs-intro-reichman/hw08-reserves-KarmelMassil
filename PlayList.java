@@ -38,8 +38,7 @@ class PlayList {
         if (size == maxSize)
         return false;
         else {
-            tracks[size] = track;
-            size++;
+            tracks[size++] = track;
             return true;
         }
     }
@@ -58,8 +57,7 @@ class PlayList {
     /** Removes the last track from this list. If the list is empty, does nothing. */
      public void removeLast() {
         if (size!= 0) {
-           tracks[size - 1] = null;
-           size--;
+           tracks[--size] = null;
         }
     }
     
@@ -79,7 +77,7 @@ class PlayList {
         String name = title.toLowerCase();
         for (int i = 0; i < size; i++) 
         {
-            if((tracks[i].getTitle().toLowerCase).equals(name)) {
+            if((tracks[i].getTitle().toLowerCase()).equals(name)) {
                 return i;
             }
         }
