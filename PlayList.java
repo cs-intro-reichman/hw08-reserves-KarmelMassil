@@ -151,15 +151,18 @@ class PlayList {
      *  If start is negative or greater than size - 1, returns -1.
      */
     private int minIndex(int start) {
-        if (start < 0 || start > size - 1)  return -1;
+        if (start < 0 || start > size)  return -1;
         else {
             int min = tracks[start].getDuration();
+            int mini = start;
             while (start < size) {
-                 if (tracks[start].getDuration() < min)
-                 min = tracks[start].getDuration();
+                 if (tracks[start].getDuration() < min) {
+                     min = tracks[start].getDuration();
+                     mini = start;
+                    }
                 start++;
             }
-            return min;
+            return mini;
         }
     }
 
@@ -174,13 +177,11 @@ class PlayList {
      *  rather than returning a new, sorted playlist, the method sorts
      *  the list on which it was called (this list). */
     public void sortedInPlace() {
-        //int min = tracks[0].getDuration(); 
-        for (int i = 1; i < size; i++){
-            if (tracks[i].isShorterThan(tracks[i - 1])) {
+        for (int i = 0; i < size; i++) {
+                int min=minIndex(i);
                 Track temp = tracks[i];
-                tracks[i] =  tracks[i - 1];
-                tracks[i - 1] = temp;
-            }
+                tracks[i] =  tracks[min];
+                tracks[min] = temp;
         }
     }
 }
