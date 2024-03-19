@@ -91,7 +91,7 @@ class PlayList {
      *  is full, does nothing and returns false. Otherwise, inserts the track and
      *  returns true. */
     public boolean add(int i, Track track) {
-        if (maxSize == size || i < 0 || i >= size)  
+        if (maxSize == size || i < 0 || i > maxSize)  
             return false;
         else {
             for (int k = size; k > i; k--) {
